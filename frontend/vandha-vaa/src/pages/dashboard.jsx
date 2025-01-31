@@ -15,7 +15,7 @@ const dashboard = () => {
     <div>
         <h2> Vandha vaa Da , {user?.name}</h2>
         <h3> your events</h3>
-        {events.map( (event) =>( 
+        {userevents.map( (event) =>( 
             <div key={event.id}
             >
                 <h4>{event.title}</h4>

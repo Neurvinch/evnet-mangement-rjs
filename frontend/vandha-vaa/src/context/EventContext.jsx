@@ -42,19 +42,25 @@ const EventProvider = ({children}) => {
 
     const bookEvent = async (eventId)  =>{
         try {
+            const token = localStorage.getItem("token");
+            const res = await axios.post(`/api/events/${eventId}/book` , {} ,{
+                haeders:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+             setEvents( events.map(event => event._id === eventId? res.data.event : event));
+             return res.data;
             
         } catch (error) {
             
+            console.log(error);
         }
     }
-
-
-
-
-
   return (
-    <div>EventProvider</div>
+    <EventProvider value={{events , createEvent , bookEvent , fetchEvenmts , loading}}>
+        {children}
+    </EventProvider>
   )
 }
 
-export default EventProvider
+export default useEvents = () => useContext(EventContext);
